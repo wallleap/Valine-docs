@@ -85,3 +85,61 @@ new Valine({
 
 
 更多信息请查看[配置项](/configuration.html)。
+
+
+## 其他
+### 在React中使用
+
+有位朋友问了到Vue里怎么使用，由于我还没学Vue，但是React我会啊，因此讲下在React中使用
+
+1. 下载安装
+
+```bash
+npm install valine --save
+```
+
+2. 在脚手架中创建一个UI组件(src/components/vComment/vComment.jsx)，内容：
+
+```jsx
+import React, { Component } from 'react'
+import Valine from 'valine'
+// 可以导入自己定义的样式
+// import 'valine-cust.css'
+
+export default class VComment extends Component {
+  componentDidMount(){
+    new Valine({
+      el: '#vcomments' ,
+      appId: '你的APPID',
+      appKey: '你的APPKEY'
+      // 其他配置项
+    })
+  }
+  render() {
+    return (
+      <div>
+        <div id="vcomments"></div>
+      </div>
+    )
+  }
+}
+```
+
+3. 在其他需要的组件中引入并到入口文件中注册该组件
+
+这里为了简便一点，直接到`index.js`中注册`VComment`组件
+
+```javascript
+import React from 'react'
+import ReactDOM from 'react-dom'
+import VComment from './components/vComment/vComment'
+ 
+ReactDOM.render(
+  <div>
+    <VComment />
+  </div>,
+  document.getElementById('root')
+)
+```
+
+
